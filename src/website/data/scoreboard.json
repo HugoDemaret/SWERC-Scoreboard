@@ -1,0 +1,46 @@
+{
+    "user1": {
+      "username": "user1",
+      "problems_months" : 5,
+      "problems_resolved": 10,
+      "codeforces_ranking": 2000
+    },
+    "user2": {
+      "username": "user2",
+      "problems_months" : 15,
+      "problems_resolved": 7,
+      "codeforces_ranking": 1800
+    },
+    "user4": {
+      "username": "user4",
+      "problems_months" : 3,
+      "problems_resolved": 5,
+      "codeforces_ranking": 1600
+    },
+    "user5": {
+      "username": "user5",
+      "problems_months" : 7,
+      "problems_resolved": 5,
+      "codeforces_ranking": 1600
+    },
+    "user6": {
+      "username": "user6",
+      "problems_months" : 14,
+      "problems_resolved": 5,
+      "codeforces_ranking": 1600
+    },
+    "user7": {
+      "username": "user7",
+      "problems_months" : 1,
+      "problems_resolved": 5,
+      "codeforces_ranking": 1600
+    },
+    "user8": {
+      "username": "user3",
+      "problems_months" : 7,
+      "problems_resolved": 5,
+      "codeforces_ranking": 1600
+    }
+}
+
+  
