@@ -121,6 +121,7 @@ class User:
         """
         url = "https://codeforces.com/api/user.status?handle=" + self.codeforces
         response = requests.get(url)
+        print(response.status_code, " 1", self.codeforces)
         if response.status_code == 200:
             data = response.json()
             self.nb_problems_all = self.get_nb_problems_all_from_codeforces(data)
@@ -129,16 +130,19 @@ class User:
         #sleep to avoid spamming the api
         time.sleep(1)
 
-        url = "https://codeforces.com/api/user.rating?handle=" + self.codeforces
+        url = "https://codeforces.com/api/user.info?handles=" + self.codeforces
         response = requests.get(url)
-        print(response.status_code , " " , self.codeforces)
+        print(response.status_code, " 2", self.codeforces)
         if response.status_code == 200:
             data = response.json()
             if len(data["result"]) == 0:
                 self.rank = 0
-                return
-            n = len(data["result"]) - 1
-            self.rank = data["result"][n]["newRating"]
+                print("here")
+            else:
+                try:
+                    self.rank = data["result"][0]["rating"]
+                except:
+                    self.rank = -1
 
 
 
@@ -221,6 +225,7 @@ class Data:
 
     def collect_data(self):
         for user in self.users.values():
+            time.sleep(1)
             user.collect_data()
 
     def get_users(self):
@@ -235,9 +240,7 @@ class Data:
         Method to convert the data to json format
         :return: the data in json format
         """
-        print([type(user) for user in self.users.values()])
-        print([user.get_name() for user in self.users.values()])
-        print([user.to_json() for user in self.users.values()])
+
 
     # Save the data to a json file
     def save_data(self):

@@ -5,6 +5,12 @@
         "score": 1070,
         "codeforces_ranking": 349
     },
+    "LucS": {
+        "username": "LucS",
+        "problems_resolved": 58,
+        "score": 1040,
+        "codeforces_ranking": 1331
+    },
     "lionel.m": {
         "username": "lionel.m",
         "problems_resolved": 150,
@@ -16,5 +22,17 @@
         "problems_resolved": 12,
         "score": 1008,
         "codeforces_ranking": 351
+    },
+    "OnurBasci": {
+        "username": "OnurBasci",
+        "problems_resolved": 11,
+        "score": 1233,
+        "codeforces_ranking": -1
+    },
+    "Pmimo21": {
+        "username": "Pmimo21",
+        "problems_resolved": 4,
+        "score": 1025,
+        "codeforces_ranking": -1
     }
 }

@@ -36,4 +36,9 @@
 		<?php include "scoreboard.php"; ?>
 	</table>
 </body>
+	<script>
+	setInterval(function() {
+  		location.reload();
+	}, 30000);
+	</script>
 </html>
