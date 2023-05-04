@@ -175,50 +175,68 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
             <?php
             $error = '';
 
-            $users = json_decode(file_get_contents('users.json'), true);
+            $users = json_decode(file_get_contents('./data/users.json'), true);
+           
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 // Get the submitted username
                 $username = $_POST['username'];
-
+            
                 // Load the users from the JSON file
-                
-
+                $users = json_decode(file_get_contents('./data/users.json'), true);
+            
                 // Check if the user exists
                 if (isset($users[$username])) {
                     // Get the user information
                     $user = $users[$username];
-
-                    // Display the form with the user information
-                    ?>
-                    <h1>Modify User: <?php echo $username; ?></h1>
-                    <form method="post">
-                        <input type="hidden" name="username" value="<?php echo $username; ?>">
-                        <label for="name">Name:</label>
-                        <input type="text" name="name" value="<?php echo $user['name']; ?>" readonly><br>
-                        <label for="codeforcesname">Codeforces Name:</label>
-                        <input type="text" name="codeforcesname" value="<?php echo $user['codeforcesname']; ?>"><br>
-                        <input type="submit" id="save-button" name="submit" value="Save">
-                    </form>
-                    <?php
+            
+                    // Update the user information with the new codeforces name
+                    $user['codeforces'] = $_POST['codeforces'];
+            
+                    // Update the user in the users array
+                    $users[$username] = $user;
+            
+                    // Save the updated users array to the JSON file
+                    file_put_contents('./data/users.json', json_encode($users));
+            
+                    // Display a success message
+                    echo '<div class="success">User updated successfully!</div>';
                 } else {
                     // Display an error message if the user does not exist
                     $error = 'User does not exist';
                 }
+            }
+            
+            if (!empty($error)) {
+                // Display the error message if there is one
+                echo '<div class="error">' . $error . '</div>';
+            } elseif (isset($_POST['username'])) {
+                // Display the form with the updated user information
+                $username = $_POST['username'];
+                $user = $users[$username];
+                ?>
+                <h1>Modify User</h1>
+                <form method="post">
+                    <input type="hidden" name="username" value="<?php echo $username; ?>">
+                    <label for="name">Name:</label>
+                    <input type="text" name="name" value="<?php echo $user['name']; ?>" readonly><br>
+                    <label for="codeforces">Codeforces Name:</label>
+                    <input type="text" name="codeforces" value="<?php echo $user['codeforces']; ?>"><br>
+                    <input type="submit" id="save-button" name="submit" value="Save">
+                </form>
+                <?php
             } else {
                 // Display the form to enter the username
                 ?>
                 <h1>Modify User</h1>
                 <form method="post">
-                    <label for="username">Username:</label>
-                    <input type="text" name="username"><br>
-                    <input type="submit" id="save-button" name="submit" value="Submit">
+                    <input type="hidden" name="username" value="<?php echo $username; ?>">
+                    <label for="name">Name:</label>
+                    <input type="text" name="name" value="<?php echo $user['name']; ?>" readonly><br>
+                    <label for="codeforces">Codeforces Name:</label>
+                    <input type="text" name="codeforces" value="<?php echo $user['codeforces']; ?>"><br>
+                    <input type="submit" id="save-button" name="submit" value="Save">
                 </form>
                 <?php
-            }
-
-            if (!empty($error)) {
-                // Display the error message if there is one
-                echo '<div class="error">' . $error . '</div>';
             }
             ?>
         </div>
@@ -233,7 +251,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
             <th>Added By</th>
             <th>Last Modified</th>
             <th>Modified By</th>
-            <th>Websites</th>
+            <th>Codeforces</th>
             <th>Actions</th>
         </tr>
         </thead>

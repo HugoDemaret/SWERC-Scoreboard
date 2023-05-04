@@ -141,19 +141,32 @@ class User:
 
 
 class Data:
-    def __init__(self, path: str, user_list_path: str = "../website/data/user_list.json"):
+    def __init__(self, path: str, user_list_path: str = "../website/data/users.json"):
         self.users: dict = {}
         self.path = path
         self.user_list_path = user_list_path
-        self.load_data()
+        #self.load_data()
+        self.load_users()
+
+    def load_users(self):
+        with open(self.user_list_path, "r") as f:
+            data = json.load(f)
+        if data is not None:
+            # Get the users from the data
+            self.users = data["users"]
+        else:
+            self.users = {}
 
     # Load the data from the json file
     def load_data(self):
         # Load the data from the json file in self.path
         with open(self.path, "r") as f:
             data = json.load(f)
-        # Get the users from the data
-        self.users = data["users"]
+        if data is not None:
+            # Get the users from the data
+            self.users = data["users"]
+        else:
+            self.users = {}
 
     # Get the data from apis for every user
     def collect_data(self):
@@ -208,9 +221,9 @@ def main():
     if not os.path.exists(".env"):
         # Create a .env file
         with open(".env", "w") as f:
-            f.write("DATA_PATH = ../../data.json")
-            f.write("USER_LIST_PATH = ../website/data/user_list.json")
-            f.write("SCOREBOARD_PATH = ../website/data/scoreboard.json")
+            f.write("DATA_PATH = ./data/data.json\n")
+            f.write("USER_LIST_PATH = ../website/data/users.json\n")
+            f.write("SCOREBOARD_PATH = ../website/data/scoreboard.json\n")
     # Load the environment variables
     load_dotenv()
 
