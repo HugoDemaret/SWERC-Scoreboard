@@ -4,7 +4,7 @@ $data = json_decode(file_get_contents("./data/scoreboard.json"), true);
 
 // Sort the array by score (descending order)
 usort($data, function($a, $b) {
-    return $b["score"] - $a["score"];
+    return $b["problems_resolved"] - $a["problems_resolved"];
 });
 
 // Initialize a counter for the rank
