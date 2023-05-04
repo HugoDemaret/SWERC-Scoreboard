@@ -157,8 +157,6 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
 
       // Set a success message and redirect back to the admin page
       $success = 'Password changed successfully.';
-      header('Location: admin.php?success=' . urlencode($success));
-      exit;
     }
   }
   ?>
