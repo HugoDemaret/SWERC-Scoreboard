@@ -122,7 +122,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     $confirm_password = $_POST['confirm_password'];
 
     // Load the JSON file with the hashed passwords
-    $admins = json_decode(file_get_contents('admins.json'), true);
+    $admins = json_decode(file_get_contents('/var/data/admins.json'), true);
 
     // Get the username of the logged-in user
     $username = $_SESSION['username'];
@@ -153,7 +153,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
       $admins[$username]['salt'] = $new_salt;
 
       // Write the updated JSON file back to disk
-      file_put_contents('admins.json', json_encode($admins));
+      file_put_contents('/var/data/admins.json', json_encode($admins));
 
       // Set a success message and redirect back to the admin page
       $success = 'Password changed successfully.';

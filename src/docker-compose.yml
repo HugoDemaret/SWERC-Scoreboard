@@ -8,3 +8,4 @@ services:
             restart: unless-stopped
             volumes:
                   - ./website:/var/www/html
+                  - ./data:/var/data

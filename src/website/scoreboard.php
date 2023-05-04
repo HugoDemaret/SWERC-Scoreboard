@@ -1,6 +1,6 @@
 <?php
 // Read the JSON file and convert it to an array
-$data = json_decode(file_get_contents("./data/scoreboard.json"), true);
+$data = json_decode(file_get_contents("/var/data/scoreboard.json"), true);
 
 if (!empty($data)){
 // Sort the array by score (descending order)

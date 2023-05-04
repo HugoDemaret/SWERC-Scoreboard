@@ -7,7 +7,7 @@ $username = $_POST['username'];
 $password = $_POST['password'];
 
 // Load the JSON file with the hashed passwords
-$admins = json_decode(file_get_contents('admins.json'), true);
+$admins = json_decode(file_get_contents('/var/data/admins.json'), true);
 
 // Check if the username exists
 if (isset($admins[$username])) {

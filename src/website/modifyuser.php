@@ -175,7 +175,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
             <?php
             $error = '';
 
-            $users = json_decode(file_get_contents('./data/users.json'), true);
+            $users = json_decode(file_get_contents('/var/data/users.json'), true);
     
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Get the submitted username and new codeforces value
@@ -183,7 +183,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $newcodeforces = $_POST['newcodeforces'];
 
     // Load the users from the JSON file
-    $users = json_decode(file_get_contents('./data/users.json'), true);
+    $users = json_decode(file_get_contents('/var/data/users.json'), true);
 
     // Check if the user exists
     if (isset($users[$username])) {
@@ -197,7 +197,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $users[$username] = $user;
 
         // Save the updated users array to the JSON file
-        file_put_contents('./data/users.json', json_encode($users));
+        file_put_contents('/var/data/users.json', json_encode($users));
 
         // Display a success message
         echo '<div class="success">Codeforces value for ' . $username . ' has been updated.</div>';
