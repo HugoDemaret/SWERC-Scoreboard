@@ -171,7 +171,7 @@ class User:
 
 
 class Data:
-    def __init__(self, path: str, user_list_path: str = "../website/data/users.json"):
+    def __init__(self, path: str, user_list_path: str = "../data/users.json"):
         self.usersDict: dict = {}
         self.path = path
         self.users: dict = {}
@@ -235,7 +235,7 @@ class Data:
 
 
 class Scoreboard:
-    def __init__(self, data: Data, path: str = "../website/data/scoreboard.json"):
+    def __init__(self, data: Data, path: str = "../data/scoreboard.json"):
         self.data = data
         self.path = path
 
@@ -264,8 +264,8 @@ def main():
         # Create a .env file
         with open(".env", "w") as f:
             f.write("DATA_PATH = ./data/data.json\n")
-            f.write("USER_LIST_PATH = ../website/data/users.json\n")
-            f.write("SCOREBOARD_PATH = ../website/data/scoreboard.json\n")
+            f.write("USER_LIST_PATH = ../data/users.json\n")
+            f.write("SCOREBOARD_PATH = ../data/scoreboard.json\n")
     # Load the environment variables
     load_dotenv()
 
