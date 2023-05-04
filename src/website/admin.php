@@ -90,9 +90,9 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
         </nav>
     </header>
     <main>
-
+    
   <h1>Administration Page</h1>
-  <p>Logged in as: <?php echo $_POST['username']; ?></p>
+  <p>Logged in as: <?php echo $_SESSION['username']; ?></p>
 
   <div class="buttons">
     <button class="add-user"><a href="adduser.php">Add User</a></button>

@@ -1,0 +1,10 @@
+version: '3'
+services:
+      scoreboard-swerc:
+            container_name: scoreboard-swerc
+            build:
+                  context: .
+                  dockerfile: Dockerfile
+            restart: unless-stopped
+            volumes:
+                  - ./website:/var/www/html
