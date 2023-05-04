@@ -115,13 +115,13 @@ class User:
         Method to collect data from codeforces
         :return: None
         """
-        url = "https://codeforces.com/api/user.status?handle" + self.profile_urls["codeforces"]
+        url = "https://codeforces.com/api/user.status?handle=" + self.profile_urls["codeforces"]
         response = requests.get(url)
         if response.status_code == 200:
             data = response.json()
             self.nb_problems_all = self.get_nb_problems_all_from_codeforces(data)
 
-        url = "https://codeforces.com/api/user.info?handles" + self.profile_urls["codeforces"]
+        url = "https://codeforces.com/api/user.info?handles=" + self.profile_urls["codeforces"]
         response = requests.get(url)
         if response.status_code == 200:
             data = response.json()

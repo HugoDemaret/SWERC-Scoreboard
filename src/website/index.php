@@ -29,8 +29,8 @@
 		<tr>
 			<th>Rank</th>
 			<th>User</th>
-            <th>Month</th>
 			<th>All Time</th>
+			<th>Score</th>
 			<th>Codeforces Ranking</th>
 		</tr>
 		<?php include "scoreboard.php"; ?>

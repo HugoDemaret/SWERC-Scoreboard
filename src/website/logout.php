@@ -1,8 +1,10 @@
 <?php
-  // Log out the user and redirect to the login page
-  session_start();
-  session_unset();
-  session_destroy();
-  header('Location: login.php');
-  exit;
+session_start();
+
+// Unset the session variable
+unset($_SESSION['loggedin']);
+
+// Redirect the user to the login page
+header('Location: login.php');
+exit;
 ?>

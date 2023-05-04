@@ -2,9 +2,9 @@
 // Read the JSON file and convert it to an array
 $data = json_decode(file_get_contents("./data/scoreboard.json"), true);
 
-// Sort the array by problems resolved (descending order)
+// Sort the array by score (descending order)
 usort($data, function($a, $b) {
-    return $b["problems_months"] - $a["problems_months"];
+    return $b["score"] - $a["score"];
 });
 
 // Initialize a counter for the rank
@@ -23,8 +23,8 @@ foreach ($data as $user) {
     echo ">";
     echo "<td>" . $rank . "</td>";
     echo "<td>" . $user["username"] . "</td>";
-    echo "<td>" . $user["problems_months"] . "</td>";
     echo "<td>" . $user["problems_resolved"] . "</td>";
+    echo "<td>" . $user["score"] . "</td>";
     echo "<td>" . $user["codeforces_ranking"] . "</td>";
     echo "</tr>";
     $rank++;

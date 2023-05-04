@@ -1,45 +1,45 @@
 {
     "user1": {
       "username": "user1",
-      "problems_months" : 5,
       "problems_resolved": 10,
-      "codeforces_ranking": 2000
+      "codeforces_ranking": 2000,
+      "score": 1500
     },
     "user2": {
       "username": "user2",
-      "problems_months" : 15,
       "problems_resolved": 7,
-      "codeforces_ranking": 1800
+      "codeforces_ranking": 1800,
+      "score": 1500
     },
     "user4": {
       "username": "user4",
-      "problems_months" : 3,
       "problems_resolved": 5,
-      "codeforces_ranking": 1600
+      "codeforces_ranking": 1600,
+      "score": 15
     },
     "user5": {
       "username": "user5",
-      "problems_months" : 7,
       "problems_resolved": 5,
-      "codeforces_ranking": 1600
+      "codeforces_ranking": 1600,
+      "score": 3
     },
     "user6": {
       "username": "user6",
-      "problems_months" : 14,
       "problems_resolved": 5,
-      "codeforces_ranking": 1600
+      "codeforces_ranking": 1600,
+      "score": 2500
     },
     "user7": {
       "username": "user7",
-      "problems_months" : 1,
-      "problems_resolved": 5,
-      "codeforces_ranking": 1600
+      "problems_resolved": 25,
+      "codeforces_ranking": 1600,
+      "score": 250
     },
     "user8": {
       "username": "user3",
-      "problems_months" : 7,
       "problems_resolved": 5,
-      "codeforces_ranking": 1600
+      "codeforces_ranking": 1600,
+      "score": 365
     }
 }
 
