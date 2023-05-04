@@ -27,7 +27,7 @@ class User:
                  days_in_a_row: int,
                  nb_problems_month: int,
                  rank: int,
-
+                 codeforces: str
                  ):
         """
         Constructor of the User class
@@ -44,6 +44,8 @@ class User:
         self.days_in_a_row = days_in_a_row
         self.nb_problems_month = nb_problems_month
         self.rank = rank
+        self.codeforces = codeforces
+        self.score = 0
 
     def get_name(self):
         """
@@ -115,17 +117,19 @@ class User:
         Method to collect data from codeforces
         :return: None
         """
-        url = "https://codeforces.com/api/user.status?handle=" + self.profile_urls["codeforces"]
+        url = "https://codeforces.com/api/user.status?handle=" + self.codeforces
         response = requests.get(url)
         if response.status_code == 200:
             data = response.json()
             self.nb_problems_all = self.get_nb_problems_all_from_codeforces(data)
+            self.score = self.get_score_from_codeforces(data)
 
-        url = "https://codeforces.com/api/user.info?handles=" + self.profile_urls["codeforces"]
+        url = "https://codeforces.com/api/user.info?handles=" + self.codeforces
         response = requests.get(url)
         if response.status_code == 200:
             data = response.json()
             self.rank = data["result"][0]["rating"]
+
 
     def get_nb_problems_all_from_codeforces(self, data: dict) -> int:
         """
@@ -139,11 +143,38 @@ class User:
                 unique_problems.add(submission["id"])
         return len(unique_problems)
 
+    def get_score_from_codeforces(self, data: dict) -> int:
+        """
+        Method to get the score of the user from codeforces
+        :param data: the data from codeforces
+        :return: the score of the user from codeforces
+        """
+        score = 0
+        counter = 0
+        for submission in data["result"]:
+            if submission["verdict"] == "OK":
+                try: # If the problem has a rating
+                    score += submission["problem"]["rating"]
+                    counter += 1
+                except:
+                    pass
+        if counter > 0:
+            return score // counter
+        return 0
+
+    def get_score(self):
+        """
+        Method to get the score of the user
+        :return: the score of the user
+        """
+        return self.score
+
 
 class Data:
     def __init__(self, path: str, user_list_path: str = "../website/data/users.json"):
-        self.users: dict = {}
+        self.usersDict: dict = {}
         self.path = path
+        self.users: dict = {}
         self.user_list_path = user_list_path
         #self.load_data()
         self.load_users()
@@ -153,9 +184,16 @@ class Data:
             data = json.load(f)
         if data is not None:
             # Get the users from the data
-            self.users = data["users"]
+            self.usersDict = data
+            self.build_users()
         else:
-            self.users = {}
+            self.usersDict = {}
+
+    def build_users(self):
+        for user in self.usersDict:
+            d = dict()
+            d["codeforces"] = self.usersDict[user]["codeforces"]
+            self.users[user] = User(user, d, 0, 0, 0, 0, self.usersDict[user]["codeforces"])
 
     # Load the data from the json file
     def load_data(self):
@@ -170,7 +208,7 @@ class Data:
 
     # Get the data from apis for every user
     def collect_data(self):
-        for user in self.users:
+        for user in self.users.values():
             user.collect_data()
 
     def get_users(self):
@@ -181,9 +219,13 @@ class Data:
         return self.users
 
     def to_json_data(self):
-        return {
-                "users": {user.to_json() for user in self.users}
-                }
+        """
+        Method to convert the data to json format
+        :return: the data in json format
+        """
+        print([type(user) for user in self.users.values()])
+        print([user.get_name() for user in self.users.values()])
+        print([user.to_json() for user in self.users.values()])
 
     # Save the data to a json file
     def save_data(self):
@@ -199,16 +241,16 @@ class Scoreboard:
 
     def build_scoreboard(self):
         scoreboard = {}
-        for user in self.data.users:
+        for user in self.data.users.values():
             scoreboard[user.get_name()] = {}
+            scoreboard[user.get_name()]["username"] = user.get_name()
             scoreboard[user.get_name()]["problems_resolved"] = user.get_nb_problems_all()
-            scoreboard[user.get_name()]["days_in_a_row"] = user.get_days_in_a_row()
-            scoreboard[user.get_name()]["problems_this_month"] = user.get_nb_problems_month()
-            scoreboard[user.get_name()]["rank"] = user.get_rank()
+            scoreboard[user.get_name()]["score"] = user.get_score()
+            scoreboard[user.get_name()]["codeforces_ranking"] = user.get_rank()
         return scoreboard
 
     def to_json(self):
-        return {self.build_scoreboard()}
+        return self.build_scoreboard()
 
     def save_scoreboard(self):
         with open(self.path, "w") as f:
