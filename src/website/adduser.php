@@ -1,6 +1,6 @@
 <?php
 // Load the user data from the JSON file
-$users = json_decode(file_get_contents('./data/users.json'), true);
+$users = json_decode(file_get_contents('/var/data/users.json'), true);
 
 // Check if the user is logged in
 session_start();
@@ -25,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $codeforces = $_POST['codeforces'];
 
     // load the existing users from the json file
-    $users_json = file_get_contents('./data/users.json');
+    $users_json = file_get_contents('/var/data/users.json');
     $users = json_decode($users_json, true);
 
     // check if the user already exists
@@ -46,7 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // save the updated users array to the json file
     $users_json = json_encode($users, JSON_PRETTY_PRINT);
-    file_put_contents('./data/users.json', $users_json);
+    file_put_contents('/var/data/users.json', $users_json);
 
     // redirect to the admin page
     header('Location: admin.php');

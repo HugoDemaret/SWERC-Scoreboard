@@ -218,8 +218,8 @@ if (!empty($error)) {
         <div style="display: flex; align-items: center;">
             <label for="username" style="margin-right: 10px;">Username:</label>
             <input type="text" name="username" style="margin-right: 10px;">
-            <label for="codeforces" style="margin-right: 10px;">Codeforces:</label>
-            <input type="text" name="codeforces">
+            <label for="newcodeforces" style="margin-right: 10px;">Codeforces:</label>
+            <input type="text" name="newcodeforces">
         </div>
         <div style="text-align:center">
             <input type="submit" id="save-button" name="submit" value="Save">
