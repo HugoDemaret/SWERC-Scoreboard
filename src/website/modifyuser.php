@@ -176,6 +176,8 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
             $error = '';
 
             $users = json_decode(file_get_contents('./data/users.json'), true);
+
+            if ($user)
            
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 // Get the submitted username
@@ -218,9 +220,9 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                 <form method="post">
                     <input type="hidden" name="username" value="<?php echo $username; ?>">
                     <label for="name">Name:</label>
-                    <input type="text" name="name" value="<?php echo $user['name']; ?>" readonly><br>
+                    <input type="text" name="name"><br>
                     <label for="codeforces">Codeforces Name:</label>
-                    <input type="text" name="codeforces" value="<?php echo $user['codeforces']; ?>"><br>
+                    <input type="text" name="codeforces"><br>
                     <input type="submit" id="save-button" name="submit" value="Save">
                 </form>
                 <?php
@@ -229,11 +231,11 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                 ?>
                 <h1>Modify User</h1>
                 <form method="post">
-                    <input type="hidden" name="username" value="<?php echo $username; ?>">
+                    <input type="hidden" name="username">
                     <label for="name">Name:</label>
-                    <input type="text" name="name" value="<?php echo $user['name']; ?>" readonly><br>
+                    <input type="text" name="name"><br>
                     <label for="codeforces">Codeforces Name:</label>
-                    <input type="text" name="codeforces" value="<?php echo $user['codeforces']; ?>"><br>
+                    <input type="text" name="codeforces"><br>
                     <input type="submit" id="save-button" name="submit" value="Save">
                 </form>
                 <?php

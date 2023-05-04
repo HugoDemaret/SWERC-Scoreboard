@@ -1,3 +1,16 @@
+<?php
+// Start the session
+session_start();
+
+// Check if the user is logged in
+if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
+  // User is not logged in, so redirect to the login page
+  header('Location: login.php');
+  exit;
+}
+?>
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -99,15 +112,7 @@
   <h1>Change Password</h1>
 
   <?php
-  // Start the session
-  session_start();
-
-  // Check if the user is logged in
-  if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
-    // User is not logged in, so redirect to the login page
-    header('Location: login.php');
-    exit;
-  }
+  
 
   // If the form has been submitted, process the password change
   if ($_SERVER['REQUEST_METHOD'] === 'POST') {
