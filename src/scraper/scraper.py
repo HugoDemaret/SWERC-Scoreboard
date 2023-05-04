@@ -9,6 +9,8 @@
 # Imports
 import os
 import json
+import time
+
 import requests
 
 # Load environment variables
@@ -124,11 +126,20 @@ class User:
             self.nb_problems_all = self.get_nb_problems_all_from_codeforces(data)
             self.score = self.get_score_from_codeforces(data)
 
-        url = "https://codeforces.com/api/user.info?handles=" + self.codeforces
+        #sleep to avoid spamming the api
+        time.sleep(1)
+
+        url = "https://codeforces.com/api/user.rating?handle=" + self.codeforces
         response = requests.get(url)
+        print(response.status_code , " " , self.codeforces)
         if response.status_code == 200:
             data = response.json()
-            self.rank = data["result"][0]["rating"]
+            if len(data["result"]) == 0:
+                self.rank = 0
+                return
+            n = len(data["result"]) - 1
+            self.rank = data["result"][n]["newRating"]
+
 
 
     def get_nb_problems_all_from_codeforces(self, data: dict) -> int:
@@ -207,6 +218,7 @@ class Data:
             self.users = {}
 
     # Get the data from apis for every user
+
     def collect_data(self):
         for user in self.users.values():
             user.collect_data()
