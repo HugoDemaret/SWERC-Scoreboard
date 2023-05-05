@@ -140,9 +140,12 @@ nav {
     <header>
         <nav>
         <a href="index.php">Scoreboard</a>
+        <a href="top5.php">Top 5</a>
+        <a href="top10.php">Top 10</a>
         <a href="admin.php">Admin</a>
         <a href="adduser.php">Add User</a>
         <a href="modifyuser.php">Modify User</a>
+        <a href="config.php">Configuration</a>
         </nav>
     </header>
     <main>

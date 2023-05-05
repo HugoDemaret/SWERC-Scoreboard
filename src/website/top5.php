@@ -93,7 +93,7 @@
 				<th>Score</th>
 				<th>Codeforces Ranking</th>
 			</tr>
-			<?php include "scoreboard.php"; ?>
+			<?php include "scoreboard_top5.php"; ?>
 		</table>
 	</div>
 </body>

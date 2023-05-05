@@ -24,7 +24,7 @@ if (!empty($data)){
     $rank = 1;
 
     // Loop through the array and display the scoreboard
-    foreach ($data as $user) {
+    foreach (array_slice($data, 0, 5) as $user) {
         echo "<tr";
         if ($rank == 1) {
             echo " style='background-color: gold;'";
